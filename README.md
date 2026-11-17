@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Louise Émilie Schreiber - Portfolio Mixed Media</title>
-    <!-- Import Google Fonts dynamique (uniquement si ce n'est pas Segoe UI) -->
+    <!-- Import Google Fonts dynamique -->
     <link id="googleFontLink" rel="stylesheet">
     <style>
         :root {
@@ -52,7 +52,7 @@
         .header-titles h1 {
             font-size: 2.2rem;
             letter-spacing: -0.5px;
-            cursor: pointer; /* Permet un accès discret au mot de passe admin */
+            cursor: pointer; /* Double-clic ici pour l'accès admin */
         }
 
         .header-titles p {
@@ -90,7 +90,7 @@
             box-shadow: 5px 5px 0px var(--text-color);
         }
 
-        /* Masqué par défaut pour les visiteurs - Visible uniquement en mode édition */
+        /* Admin & Stats masqués par défaut hors mode édition */
         #adminControlsGroup {
             display: none;
             gap: 10px;
@@ -277,7 +277,7 @@
             background: var(--bg-color);
         }
 
-        /* Commandes d'édition (Visibles uniquement si Mode Édition ON) */
+        /* Commandes d'édition */
         .affiche-actions {
             position: absolute;
             top: 10px;
@@ -335,7 +335,7 @@
             border-color: var(--accent-sage);
         }
 
-        /* Bouton Ajouter Affiche Flottant (Visible uniquement en mode édition) */
+        /* Bouton Ajouter Affiche Flottant */
         .btn-ajouter-affiche {
             position: fixed;
             bottom: 30px;
@@ -561,9 +561,10 @@
                 <div class="form-champ">
                     <label for="urlInput">Lien Web externe / Réseau Social (Cliquable)</label>
                     <input type="url" id="urlInput" placeholder="https://instagram.com/..., https://pinterest.com/...">
+                    
                 </div>
 
-                <div class="form-champ">
+                   <div class="form-champ">
                     <label for="badgeInput">Type de contenu (Badge)</label>
                     <input type="text" id="badgeInput" required placeholder="Ex: Instagram, GIF, Article...">
                 </div>
@@ -777,11 +778,11 @@
         let affiches = JSON.parse(localStorage.getItem('affichesPortfolio')) || affichesInitiales;
         let commentaires = JSON.parse(localStorage.getItem('commentairesPortfolio')) || [];
         let statsVues = parseInt(localStorage.getItem('statsVues') || '1') + 1;
-        let modeEdition = true; // Activé par défaut après connexion admin réussie
+        let modeEdition = false; // Caché par défaut pour les visiteurs
 
         let configGlobal = JSON.parse(localStorage.getItem('configPortfolio')) || {
             font: "Segoe UI",
-            adminPassword: "louise", // Mot de passe par défaut modifiable
+            adminPassword: "louise",
             copyrightType: "© Tous droits réservés",
             ownerName: "Louise Émilie Schreiber",
             companyName: "",
@@ -809,9 +810,9 @@
         function appliquerConfigGlobale() {
             const fontName = configGlobal.font || "Segoe UI";
             if(fontName !== "Segoe UI") {
-                document.getElementById('googleFontLink'].href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;600;700&display=swap`;
+                document.getElementById('googleFontLink').href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;600;700&display=swap`;
             } else {
-                document.getElementById('googleFontLink'].href = "";
+                document.getElementById('googleFontLink').href = "";
             }
             document.documentElement.style.setProperty('--custom-font', `'${fontName}', sans-serif`);
 
@@ -845,7 +846,6 @@
             }
         }
 
-        // Fonction pour exporter le JSON et mettre à jour facilement le site pour tous les visiteurs
         function exporterCodeJSON() {
             const dataToExport = {
                 affichesInitiales: affiches,
@@ -1003,7 +1003,7 @@
             if(fontName !== "Segoe UI") {
                 document.getElementById('googleFontLink').href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;600;700&display=swap`;
             } else {
-                document.getElementById('googleFontLink'].href = "";
+                document.getElementById('googleFontLink').href = "";
             }
             document.documentElement.style.setProperty('--custom-font', `'${fontName}', sans-serif`);
         }
@@ -1234,8 +1234,6 @@
             }
         }
 
-        // Par défaut, le mode édition est masqué aux visiteurs. 
-        // Tu peux double-cliquer sur le titre principal "Atelier Mixed Media" pour entrer ton mot de passe.
         modeEdition = false;
         document.body.classList.remove('mode-edition-actif');
 
