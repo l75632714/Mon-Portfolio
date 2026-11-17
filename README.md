@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Louise Émilie Schreiber - Portfolio Mixed Media</title>
-    <!-- Import Google Fonts dynamique -->
-    <link id="googleFontLink" href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Import Google Fonts dynamique (uniquement si ce n'est pas Segoe UI) -->
+    <link id="googleFontLink" rel="stylesheet">
     <style>
         :root {
             --bg-color: #F7F5F0;
@@ -52,6 +52,7 @@
         .header-titles h1 {
             font-size: 2.2rem;
             letter-spacing: -0.5px;
+            cursor: pointer; /* Permet un accès discret au mot de passe admin */
         }
 
         .header-titles p {
@@ -89,11 +90,13 @@
             box-shadow: 5px 5px 0px var(--text-color);
         }
 
-        /* Stats masqué par défaut hors mode édition */
-        #btnAdminPanneau {
+        /* Masqué par défaut pour les visiteurs - Visible uniquement en mode édition */
+        #adminControlsGroup {
             display: none;
+            gap: 10px;
+            align-items: center;
         }
-        .mode-edition-actif #btnAdminPanneau {
+        .mode-edition-actif #adminControlsGroup {
             display: inline-flex;
         }
 
@@ -274,7 +277,7 @@
             background: var(--bg-color);
         }
 
-        /* Commandes d'édition */
+        /* Commandes d'édition (Visibles uniquement si Mode Édition ON) */
         .affiche-actions {
             position: absolute;
             top: 10px;
@@ -332,7 +335,7 @@
             border-color: var(--accent-sage);
         }
 
-        /* Bouton Ajouter Affiche Flottant */
+        /* Bouton Ajouter Affiche Flottant (Visible uniquement en mode édition) */
         .btn-ajouter-affiche {
             position: fixed;
             bottom: 30px;
@@ -500,23 +503,26 @@
 
     <header>
         <div class="header-titles">
-            <h1 id="headerMainTitle">Atelier Mixed Media</h1>
+            <!-- Double-clic sur le titre pour ouvrir l'accès administrateur par mot de passe -->
+            <h1 id="headerMainTitle" ondblclick="demanderAccesAdmin()" title="Double-cliquez ici pour vous connecter">Atelier Mixed Media</h1>
             <p id="headerSubTitle">Galerie d'affiches, créations IA & collages</p>
         </div>
         <div class="header-actions">
-            <!-- Bouton Buy me a drink avec texte exact -->
+            <!-- Bouton Buy me a drink -->
             <a id="buyDrinkBtn" href="https://buymeacoffee.com/votre_lien" target="_blank" class="btn-header" style="background-color: var(--accent-rose);" title="Buy me a drink">
                 Buy me a drink if you like my art
             </a>
-            <!-- Stats & Modération (Visible uniquement en mode édition) -->
-            <button class="btn-header" style="background-color: var(--accent-sand);" id="btnAdminPanneau" onclick="ouvrirStats()"> Stats & Modération</button>
-            <button class="btn-header" id="toggleEditBtn" onclick="toggleModeEdition()">Mode Édition : OFF</button>
+            <!-- Groupe d'administration invisible pour les visiteurs -->
+            <div id="adminControlsGroup">
+                <button class="btn-header" style="background-color: var(--accent-sand);" id="btnAdminPanneau" onclick="ouvrirStats()">Stats & Modération</button>
+                <button class="btn-header" id="toggleEditBtn" onclick="toggleModeEdition()" style="background-color: var(--accent-rose);">Mode Édition : ON</button>
+                <button class="btn-header" style="background-color: #333; color: #fff;" onclick="exporterCodeJSON()">Exporter JSON</button>
+            </div>
         </div>
     </header>
 
     <main class="grid-affiches" id="galerieAffiches"></main>
 
-    <!-- Pied de page dynamique (Copyright, Nom, Brand, Année, Disclaimer) -->
     <footer>
         <div id="footerCopyright">2026 © Tous droits réservés à Louise Émilie Schreiber</div>
         <div id="footerBrandDetails" style="font-size: 0.8rem; opacity: 0.8;"></div>
@@ -538,13 +544,11 @@
                     <input type="text" id="titreInput" required placeholder="Ex: Composition géométrique n°4">
                 </div>
 
-                <!-- Option Image / GIF -->
                 <div class="form-champ">
                     <label for="bgImageInput">URL de l'image ou du GIF</label>
                     <input type="url" id="bgImageInput" placeholder="https://... (.jpg, .png, .gif)">
                 </div>
 
-                <!-- Module de recherche Giphy intégré -->
                 <div class="form-champ">
                     <label>Rechercher un GIF sur Giphy</label>
                     <div class="giphy-search-box">
@@ -573,7 +577,6 @@
                     </select>
                 </div>
 
-                                    <!-- Palette chromatique complète & Harmonisation -->
                 <div class="form-champ">
                     <label for="couleurSelect">Couleur de fond (Palette libre)</label>
                     <div class="color-picker-row">
@@ -616,7 +619,6 @@
                     </select>
                 </div>
 
-                <!-- Configuration globale du site (Polices, Copyrights, Marques, Année, Disclaimer) dans l'éditeur -->
                 <hr style="margin: 20px 0; border: 1px solid var(--text-color);">
                 <h3 style="font-size: 1rem; margin-bottom: 10px;">Paramètres globaux du Portfolio</h3>
 
@@ -641,6 +643,11 @@
                 </div>
 
                 <div class="form-champ">
+                    <label for="adminPasswordInput">Mot de passe Administrateur</label>
+                    <input type="text" id="adminPasswordInput" placeholder="Modifier votre mot de passe admin">
+                </div>
+
+                <div class="form-champ">
                     <label for="copyrightTypeSelect">Type de Copyright (Mondial)</label>
                     <select id="copyrightTypeSelect">
                         <option value="© Tous droits réservés">© Tous droits réservés (France / International)</option>
@@ -659,7 +666,6 @@
                     <label for="companyNameInput">Nom de la Société (Company Name)</label>
                     <input type="text" id="companyNameInput" placeholder="Ex: Schreiber Studio">
                 </div>
-
                 <div class="form-champ">
                     <label for="brandNameInput">Nom de la Marque (Brand Name)</label>
                     <input type="text" id="brandNameInput" placeholder="Ex: Mixed Media Art">
@@ -771,10 +777,11 @@
         let affiches = JSON.parse(localStorage.getItem('affichesPortfolio')) || affichesInitiales;
         let commentaires = JSON.parse(localStorage.getItem('commentairesPortfolio')) || [];
         let statsVues = parseInt(localStorage.getItem('statsVues') || '1') + 1;
-        let modeEdition = false;
+        let modeEdition = true; // Activé par défaut après connexion admin réussie
 
         let configGlobal = JSON.parse(localStorage.getItem('configPortfolio')) || {
             font: "Segoe UI",
+            adminPassword: "louise", // Mot de passe par défaut modifiable
             copyrightType: "© Tous droits réservés",
             ownerName: "Louise Émilie Schreiber",
             companyName: "",
@@ -786,21 +793,28 @@
 
         localStorage.setItem('statsVues', statsVues);
 
+        function demanderAccesAdmin() {
+            const saisie = prompt("Entrez le mot de passe administrateur :");
+            const mdpActuel = configGlobal.adminPassword || "louise";
+            if (saisie === mdpActuel) {
+                modeEdition = true;
+                document.body.classList.add('mode-edition-actif');
+                alert("Mode Édition activé avec succès !");
+                afficherAffiches();
+            } else if (saisie !== null) {
+                alert("Mot de passe incorrect.");
+            }
+        }
+
         function appliquerConfigGlobale() {
-            // Police
             const fontName = configGlobal.font || "Segoe UI";
-            document.getElementById('googleFontLink').href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;600;700&display=swap`;
+            if(fontName !== "Segoe UI") {
+                document.getElementById('googleFontLink'].href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;600;700&display=swap`;
+            } else {
+                document.getElementById('googleFontLink'].href = "";
+            }
             document.documentElement.style.setProperty('--custom-font', `'${fontName}', sans-serif`);
 
-            // Lien Medium Header
-            const mediumBtn = document.getElementById('mediumHeaderLink');
-            if (mediumBtn) {
-                const url = configGlobal.mediumUrl || "https://medium.com/@louisemilieschreiber";
-                mediumBtn.href = url;
-                mediumBtn.style.display = url ? 'inline-block' : 'none';
-            }
-
-            // Footer
             const year = configGlobal.year || "2026";
             const cpType = configGlobal.copyrightType || "© Tous droits réservés";
             const owner = configGlobal.ownerName || "";
@@ -824,13 +838,27 @@
             const btn = document.getElementById('toggleEditBtn');
             if (modeEdition) {
                 btn.textContent = "Mode Édition : ON";
-                btn.style.backgroundColor = "var(--accent-rose)";
                 document.body.classList.add('mode-edition-actif');
             } else {
                 btn.textContent = "Mode Édition : OFF";
-                btn.style.backgroundColor = "var(--accent-sage)";
                 document.body.classList.remove('mode-edition-actif');
             }
+        }
+
+        // Fonction pour exporter le JSON et mettre à jour facilement le site pour tous les visiteurs
+        function exporterCodeJSON() {
+            const dataToExport = {
+                affichesInitiales: affiches,
+                configGlobal: configGlobal
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataToExport, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "portfolio_data.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            alert("Données exportées ! Vous pouvez remplacer 'affichesInitiales' dans votre code source par ce contenu pour que tous les visiteurs voient vos modifications.");
         }
 
         function afficherAffiches() {
@@ -972,7 +1000,11 @@
         }
 
         function changerPoliceGoogle(fontName) {
-            document.getElementById('googleFontLink').href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;600;700&display=swap`;
+            if(fontName !== "Segoe UI") {
+                document.getElementById('googleFontLink').href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@400;600;700&display=swap`;
+            } else {
+                document.getElementById('googleFontLink'].href = "";
+            }
             document.documentElement.style.setProperty('--custom-font', `'${fontName}', sans-serif`);
         }
 
@@ -1102,6 +1134,7 @@
 
             document.getElementById('googleFontSelect').value = configGlobal.font;
             document.getElementById('mediumUrlInput').value = configGlobal.mediumUrl || "https://medium.com/@louisemilieschreiber";
+            document.getElementById('adminPasswordInput').value = configGlobal.adminPassword || "louise";
             document.getElementById('copyrightTypeSelect').value = configGlobal.copyrightType;
             document.getElementById('ownerNameInput').value = configGlobal.ownerName;
             document.getElementById('companyNameInput').value = configGlobal.companyName;
@@ -1133,6 +1166,7 @@
 
             document.getElementById('googleFontSelect').value = configGlobal.font;
             document.getElementById('mediumUrlInput').value = configGlobal.mediumUrl || "https://medium.com/@louisemilieschreiber";
+            document.getElementById('adminPasswordInput').value = configGlobal.adminPassword || "louise";
             document.getElementById('copyrightTypeSelect').value = configGlobal.copyrightType;
             document.getElementById('ownerNameInput').value = configGlobal.ownerName;
             document.getElementById('companyNameInput').value = configGlobal.companyName;
@@ -1163,9 +1197,12 @@
                 clics: id ? (affiches.find(a => a.id === parseInt(id))?.clics || 0) : 0
             };
 
+            const nouveauMdp = document.getElementById('adminPasswordInput').value;
+
             configGlobal = {
                 font: document.getElementById('googleFontSelect').value,
                 mediumUrl: document.getElementById('mediumUrlInput') ? document.getElementById('mediumUrlInput').value : "https://medium.com/@louisemilieschreiber",
+                adminPassword: nouveauMdp ? nouveauMdp : (configGlobal.adminPassword || "louise"),
                 copyrightType: document.getElementById('copyrightTypeSelect').value,
                 ownerName: document.getElementById('ownerNameInput').value,
                 companyName: document.getElementById('companyNameInput').value,
@@ -1196,6 +1233,11 @@
                 afficherAffiches();
             }
         }
+
+        // Par défaut, le mode édition est masqué aux visiteurs. 
+        // Tu peux double-cliquer sur le titre principal "Atelier Mixed Media" pour entrer ton mot de passe.
+        modeEdition = false;
+        document.body.classList.remove('mode-edition-actif');
 
         appliquerConfigGlobale();
         afficherAffiches();
