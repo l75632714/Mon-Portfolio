@@ -796,11 +796,11 @@
 
         let configGlobal = JSON.parse(localStorage.getItem('configPortfolio')) || {
             font: "Segoe UI",
-            adminPassword: "louise",
-            year: "",
-            copyrightType: "2026 © Tous droits réservés",
+            adminPassword: "louise",        
+            copyrightType: "© Tous droits réservés",
             ownerName: "Louise Émilie Schreiber, Groupe Sefer",
             companyName: "",
+            year: "2026",
             brandName: "",
             disclaimer: "",
             mediumUrl: "https://medium.com/@louisemilieschreiber"
