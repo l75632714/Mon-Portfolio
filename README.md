@@ -561,6 +561,21 @@
                 <div class="form-champ">
                     <label for="urlInput">Lien Web externe / Réseau Social (Cliquable)</label>
                     <input type="url" id="urlInput" placeholder="https://instagram.com/..., https://pinterest.com/...">
+                    
+                </div>
+
+                <div class="form-champ">
+                    <label for="badgeInput">Type de contenu (Badge)</label>
+                    <input type="text" id="badgeInput" required placeholder="Ex: Instagram, GIF, Article...">
+                </div>
+
+                <div class="form-champ">
+                    <label for="tailleSelect">Format de l'affiche</label>
+                    <select id="tailleSelect">
+                        <option value="h-petite">Petite hauteur</option>
+                        <option value="h-moyenne" selected>Hauteur moyenne</option>
+                        <option value="h-grande">Grande hauteur</option>
+                    </select>
                 </div>
 
                 <div class="form-champ">
@@ -782,11 +797,11 @@
         let configGlobal = JSON.parse(localStorage.getItem('configPortfolio')) || {
             font: "Segoe UI",
             adminPassword: "louise",
-            copyrightType: "2026 © Tous droits réservés",
-            year: "",
-            ownerName: "Louise Émilie Schreiber" "Groupe Sefer",
+            copyrightType: "© Tous droits réservés",
+            ownerName: "Louise Émilie Schreiber",
             companyName: "",
             brandName: "",
+            year: "2026",
             disclaimer: "",
             mediumUrl: "https://medium.com/@louisemilieschreiber"
         };
