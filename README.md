@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Louise Émilie Schreiber - Portfolio Mixed Media</title>
+    <title>Louise Émilie Schreiber - Mon Portfolio Atelier Mixed Media</title>
     <!-- Import Google Fonts dynamique -->
     <link id="googleFontLink" rel="stylesheet">
     <style>
@@ -505,7 +505,7 @@
         <div class="header-titles">
             <!-- Double-clic sur le titre pour ouvrir l'accès administrateur par mot de passe -->
             <h1 id="headerMainTitle" ondblclick="demanderAccesAdmin()" title="Double-cliquez ici pour vous connecter">Atelier Mixed Media</h1>
-            <p id="headerSubTitle">Galerie de création</p>
+            <p id="headerSubTitle">Galerie de créations</p>
         </div>
         <div class="header-actions">
             <!-- Bouton Buy me a drink -->
