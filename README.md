@@ -784,7 +784,7 @@
             adminPassword: "louise",
             copyrightType: "2026 © Tous droits réservés",
             year: "",
-            ownerName: "Louise Émilie Schreiber", "Groupe Sefer",
+            ownerName: "Louise Émilie Schreiber" "Groupe Sefer",
             companyName: "",
             brandName: "",
             disclaimer: "",
