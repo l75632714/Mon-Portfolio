@@ -505,7 +505,7 @@
         <div class="header-titles">
             <!-- Double-clic sur le titre pour ouvrir l'accès administrateur par mot de passe -->
             <h1 id="headerMainTitle" ondblclick="demanderAccesAdmin()" title="Double-cliquez ici pour vous connecter">Atelier Mixed Media</h1>
-            <p id="headerSubTitle">Galerie d'affiches, créations IA & collages</p>
+            <p id="headerSubTitle">Galerie de création</p>
         </div>
         <div class="header-actions">
             <!-- Bouton Buy me a drink -->
@@ -561,10 +561,9 @@
                 <div class="form-champ">
                     <label for="urlInput">Lien Web externe / Réseau Social (Cliquable)</label>
                     <input type="url" id="urlInput" placeholder="https://instagram.com/..., https://pinterest.com/...">
-                    
                 </div>
 
-                   <div class="form-champ">
+                <div class="form-champ">
                     <label for="badgeInput">Type de contenu (Badge)</label>
                     <input type="text" id="badgeInput" required placeholder="Ex: Instagram, GIF, Article...">
                 </div>
