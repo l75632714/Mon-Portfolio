@@ -3,42 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio - Paramètres Juridiques</title>
+    <title>Mon Portfolio Artistique</title>
     <style>
         :root {
-            --bg-color: #f9f9f9;
+            --bg-color: #f4f5f7;
             --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #cccccc;
+            --text-color: #2c3e50;
+            --border-color: #dcdde1;
             --accent-color: #0066cc;
-            --desc-bg: #f1f1f1;
-            --desc-color: #555555;
+            --desc-bg: #f8f9fa;
+            --desc-color: #495057;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            max-width: 650px;
-            margin: 40px auto;
+            max-width: 900px;
+            margin: 0 auto;
             padding: 20px;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        .form-group {
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background: var(--card-bg);
-            padding: 24px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 15px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* En-tête */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+        }
+
+        header p {
+            margin: 0;
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        /* Sections générales */
+        .section-container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
         }
 
         h2 {
             margin-top: 0;
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             margin-bottom: 20px;
             color: var(--text-color);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
         }
 
+        /* Grille de projets du portfolio */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* Formulaire & Options juridiques */
         label {
             display: block;
             margin-bottom: 8px;
@@ -69,32 +156,79 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #777;
+            color: #718096;
             margin-bottom: 6px;
+            font-weight: 700;
         }
 
         #legal-description {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--desc-color);
             background: var(--desc-bg);
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 6px;
             min-height: 40px;
             margin: 0;
-            border-left: 3px solid var(--accent-color);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* Pied de page */
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #718096;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body>
 
-    <div class="form-group">
+    <!-- Barre de navigation -->
+    <nav>
+        <div class="logo">Mon Portfolio</div>
+        <ul class="nav-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#juridique">Paramètres juridiques</a></li>
+        </ul>
+    </nav>
+
+    <!-- En-tête / Accueil -->
+    <header id="accueil">
+        <h1>Bienvenue sur mon Portfolio</h1>
+        <p>Espace de présentation de mes créations artistiques et multimédias</p>
+    </header>
+
+    <!-- Section Projets -->
+    <div id="projets" class="section-container">
+        <h2>Mes Projets Récents</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Projet 01</h3>
+                <p>Création graphique originale et illustrations numériques.</p>
+            </div>
+            <div class="project-card">
+                <h3>Projet 02</h3>
+                <p>Photographies artistiques et retouches de paysages.</p>
+            </div>
+            <div class="project-card">
+                <h3>Projet 03</h3>
+                <p>Design d'interface web et intégration front-end.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section de Configuration Juridique (19 options + année dynamique) -->
+    <div id="juridique" class="section-container">
         <h2>Configuration des options juridiques</h2>
         
         <label for="legal-options-select">Sélectionnez le régime de protection :</label>
         <select id="legal-options-select" name="legal_option">
             <option value="aucun-copyright">Aucun copyright (Libre de droits ou contenu tiers / lien posté)</option>
             <option value="tous-droits-reserves">© Tous droits réservés</option>
-            <option value="tous-droits-reserves-2026">© 2026 Tous droits réservés / All rights reserved</option>
+            <!-- L'option dynamique avec l'année en cours sera injectée ici par JavaScript -->
             <option value="all-rights-reserved">© All rights reserved</option>
             <option value="copyright-all-rights-reserved">Copyright © All rights reserved</option>
             <option value="propriete-intellectuelle-lda">Propriété intellectuelle — Droit d'auteur global (LDA / Berne)</option>
@@ -117,11 +251,28 @@
         <p id="legal-description">Contenu totalement libre sans restriction, ou contenu soumis au droit d'auteur d'un tiers / provenant d'un lien externe.</p>
     </div>
 
+    <!-- Pied de page global du site avec année automatique -->
+    <footer>
+        <p>&copy; <span id="current-year"></span> Mon Portfolio - Tous droits réservés</p>
+    </footer>
+
+    <!-- Script JavaScript global pour le site -->
     <script>
+        // Récupération automatique de l'année en cours
+        const currentYear = new Date().getFullYear();
+
+        // 1. Injection dynamique de l'option avec l'année en cours dans le menu déroulant (en 3ème position)
+        const selectElement = document.getElementById('legal-options-select');
+        const dynamicOption = document.createElement('option');
+        dynamicOption.value = "tous-droits-reserves-annee";
+        dynamicOption.textContent = `© ${currentYear} Tous droits réservés / All rights reserved`;
+        selectElement.insertBefore(dynamicOption, selectElement.children[2]);
+
+        // 2. Dictionnaire complet des descriptions associées aux 19 options
         const legalDescriptions = {
             "aucun-copyright": "Contenu totalement libre sans restriction, ou contenu soumis au droit d'auteur d'un tiers / provenant d'un lien externe.",
             "tous-droits-reserves": "Le choix par défaut à privilégier pour ton portfolio artistique.",
-            "tous-droits-reserves-2026": "Version bilingue actualisée avec l'année en cours, idéale pour un public suisse et européen.",
+            "tous-droits-reserves-annee": `Version bilingue actualisée avec l'année en cours (${currentYear}), idéale pour un public suisse et européen.`,
             "all-rights-reserved": "Standard international en anglais couramment utilisé pour les sites web à portée mondiale.",
             "copyright-all-rights-reserved": "Formule universelle complète combinant le terme 'Copyright' et le symbole ©.",
             "propriete-intellectuelle-lda": "Protection automatique de l'œuvre dès sa création (régie en Suisse par la LDA et mondialement par la Convention de Berne).",
@@ -140,15 +291,18 @@
             "cc-by-nc-nd": "La plus restrictive des licences CC ; autorise uniquement le téléchargement et le partage à l'identique, sans modification et sans usage commercial."
         };
 
-        const selectElement = document.getElementById('legal-options-select');
         const descriptionElement = document.getElementById('legal-description');
 
+        // 3. Gestionnaire d'événement pour changer la description dynamiquement au changement de sélection
         selectElement.addEventListener('change', (event) => {
             const selectedKey = event.target.value;
             if (descriptionElement) {
                 descriptionElement.textContent = legalDescriptions[selectedKey] || '';
             }
         });
+
+        // 4. Mise à jour automatique de l'année dans le pied de page du portfolio
+        document.getElementById('current-year').textContent = currentYear;
     </script>
 
 </body>
