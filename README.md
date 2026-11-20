@@ -5,41 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Portfolio - Paramètres Juridiques</title>
     <style>
+        :root {
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #cccccc;
+            --accent-color: #0066cc;
+            --desc-bg: #f1f1f1;
+            --desc-color: #555555;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 650px;
             margin: 40px auto;
             padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
         }
+
         .form-group {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
+
         select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            background-color: #fff;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: border-color 0.2s;
         }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .description-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #777;
+            margin-bottom: 6px;
+        }
+
         #legal-description {
-            font-size: 13px;
-            color: #666;
-            font-style: italic;
-            background: #f1f1f1;
-            padding: 10px;
-            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--desc-color);
+            background: var(--desc-bg);
+            padding: 12px 16px;
+            border-radius: 6px;
             min-height: 40px;
+            margin: 0;
+            border-left: 3px solid var(--accent-color);
         }
     </style>
 </head>
@@ -71,12 +113,12 @@
             <option value="cc-by-nc-nd">CC BY-NC-ND (Attribution + Non-commercial + Pas de modification)</option>
         </select>
 
-        <label>Description de l'option :</label>
+        <div class="description-label">Description de l'option :</div>
         <p id="legal-description">Contenu totalement libre sans restriction, ou contenu soumis au droit d'auteur d'un tiers / provenant d'un lien externe.</p>
     </div>
 
     <script>
-        const descriptions = {
+        const legalDescriptions = {
             "aucun-copyright": "Contenu totalement libre sans restriction, ou contenu soumis au droit d'auteur d'un tiers / provenant d'un lien externe.",
             "tous-droits-reserves": "Le choix par défaut à privilégier pour ton portfolio artistique.",
             "tous-droits-reserves-2026": "Version bilingue actualisée avec l'année en cours, idéale pour un public suisse et européen.",
@@ -104,7 +146,7 @@
         selectElement.addEventListener('change', (event) => {
             const selectedKey = event.target.value;
             if (descriptionElement) {
-                descriptionElement.textContent = descriptions[selectedKey] || '';
+                descriptionElement.textContent = legalDescriptions[selectedKey] || '';
             }
         });
     </script>
